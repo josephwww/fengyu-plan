@@ -3,29 +3,17 @@ import datetime
 from common.const import ENTRY_DATE_FORMAT
 
 
-class Employee:
-    def __init__(self, name, department, position, entry_time):
-        """
-        初始化员工信息
-        :param name:
-        :param department:
-        :param position:
-        :param entry_time:
-        """
+class Employee(object):
+    def __init__(self, eid, name, department, position, entry_time):
+        self.eid = eid
         self.name = name
         self.department = department
         self.position = position
         self.entry_time = datetime.datetime.strptime(entry_time, ENTRY_DATE_FORMAT)
 
-    def update(self, name=None, department=None, position=None, entry_time=None):
-        """
-        员工信息更新
-        :param name:
-        :param department:
-        :param position:
-        :param entry_time:
-        :return:
-        """
+    def update(self, eid = None, name=None, department=None, position=None, entry_time=None):
+        if eid:
+            self.eid = eid
         if name:
             self.name = name
         if department:
@@ -40,7 +28,7 @@ class Employee:
         重写员工字符串描述信息
         :return:
         """
-        string = f"姓名：{self.name}，部门：{self.department}，职位：{self.position}，" \
+        string = f"工号：{self.eid}，姓名：{self.name}，部门：{self.department}，职位：{self.position}，" \
                  f"入职时间：{self.entry_time.strftime(ENTRY_DATE_FORMAT)}"
         return string
 

@@ -4,3 +4,8 @@ class EmployeeNotFoundException(Exception):
 
 class CommandNotSupportedException(Exception):
     message = "Command not supported"
+
+
+class EmployeeIDFoundException(Exception):
+    message = "employee id already exists in the database"
+

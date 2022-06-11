@@ -1,14 +1,14 @@
 from database.employee import Employee
 from common.exception import EmployeeNotFoundException
+from common.exception import EmployeeIDFoundException
 from common.const import ASC
 from common.const import EMPTY_DATABASE_MSG
 from common.const import EMPLOYEE_INFO
 
 
-class Client:
+class Client(object):
     def __init__(self):
         self.database = dict()
-        self.max_eid = 1
 
     def create(self, employee: Employee):
         """
@@ -16,10 +16,10 @@ class Client:
         :param employee:
         :return:
         """
-        eid = self.max_eid
-        self.database[eid] = employee
-        self.max_eid += 1
-        return eid
+        if employee.eid in self.database:
+            raise EmployeeIDFoundException
+        self.database[employee.eid] = employee
+        return employee.eid
 
     def update(self, eid, employee: Employee):
         """
@@ -91,4 +91,4 @@ class Client:
         if not edata:
             print(EMPTY_DATABASE_MSG)
         for eid, employee in edata:
-            print(EMPLOYEE_INFO.format(eid=eid, employee=employee))
+            print(EMPLOYEE_INFO.format(employee=employee))
