@@ -6,7 +6,7 @@ from common.const import EMPTY_DATABASE_MSG
 from common.const import EMPLOYEE_INFO
 
 
-class Client(object):
+class EmployeeClient(object):
     def __init__(self):
         self.database = dict()
 

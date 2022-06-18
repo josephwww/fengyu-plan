@@ -1,12 +1,14 @@
 from common import const
 from common import utils
 from common.command_action import CommandAction
+from common.command_parser import CommandParser
 
 
 class Parser(object):
     def __init__(self, client):
         self.cmd = None
         self.client = client
+        self.cmd_parsers = CommandParser()
         self.get_command()
 
     def get_command(self):
@@ -22,8 +24,9 @@ class Parser(object):
         if cmd not in const.SupportedCommand.get_values():
             self.retry(const.CUSTOM_ERROR_MSG.format(cmd=cmd))
             return
+        parsed_cmd_dict = self.cmd_parsers.parse_cmd(cmd, cmd_list)
         cmd_action = getattr(CommandAction, cmd)
-        cmd_action(self.client, cmd_list)
+        cmd_action(self.client, **parsed_cmd_dict)
         self.get_command()
 
     def retry(self, msg):

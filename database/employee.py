@@ -11,7 +11,7 @@ class Employee(object):
         self.position = position
         self.entry_time = datetime.datetime.strptime(entry_time, ENTRY_DATE_FORMAT)
 
-    def update(self, eid = None, name=None, department=None, position=None, entry_time=None):
+    def update(self, eid=None, name=None, department=None, position=None, entry_time=None):
         if eid:
             self.eid = eid
         if name:

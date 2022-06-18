@@ -26,19 +26,19 @@ FAILED = "failed"
 ADD_COMMAND_LIMIT = 5
 DELETE_COMMAND_LIMIT = 1
 
+
 class SupportedCommand(object):
     HELP = "help"
     ADD = "add"
     MOD = "mod"
     DELETE = "delete"
-    SHOW = "show"
     EXIT = "exit"
     GET = "get"
     LIST = "list"
 
     @classmethod
     def get_values(cls):
-        return cls.HELP, cls.ADD, cls.MOD, cls.DELETE, cls.SHOW, cls.EXIT, cls.GET, cls.LIST
+        return cls.HELP, cls.ADD, cls.MOD, cls.DELETE, cls.EXIT, cls.GET, cls.LIST
 
 
 class EmployeeAttributes(object):
