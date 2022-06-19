@@ -5,16 +5,19 @@ ASC = "ASC"
 DESC = "DESC"
 
 # 控制台打印指令
-PROMPT_MSG = "请输入命令（help查看说明）：\n>> "
+INITIAL_MSG = "请输入命令（help查看说明）："
+PROMPT_MSG = ">> "
 DEFAULT_ERROR_MSG = "指令有误，请重新输入"
 CUSTOM_ERROR_MSG = "指令{cmd}有误，请重新输入"
-WRONG_EID_MSG = "请输入正确格式的员工id"
+EID_EXIST_ERROR_MSG = "员工id已存在，无法添加！"
+WRONG_EID_MSG = "请输入正确的员工id"
 WRONG_ENTRY_TIME_MSG = "请输入带中杠的日期格式，例如2022-06-04"
 EMPTY_DATABASE_MSG = "数据库无员工数据，请插入！"
-EMPLOYEE_INFO = "Employee : {employee}"
 CREATE_SUCCESS_MSG = "新员工创建成功，员工id：{eid}"
 DELETE_SUCCESS_MSG = "员工{eid}已被删除"
 UPDATE_SUCCESS_MSG = "员工{eid}信息已更新"
+EMPLOYEE_NOT_FOUND_MSG = "员工ID未找到，请检查输入"
+BASE_ERROR_MSG = "{operation}失败，原因：{reason}"
 
 
 # 函数执行成功或失败返回
@@ -53,8 +56,8 @@ class EmployeeAttributes(object):
         return cls.NAME, cls.POSITION, cls.DEPARTMENT, cls.ENTRY_TIME
 
     @classmethod
-    def sortable_attrs(cls):
-        return cls.NAME, cls.DEPARTMENT, cls.POSITION
+    def sortable_attrs(cls) -> tuple:
+        return cls.EMPLOYEE_ID, cls.NAME, cls.DEPARTMENT, cls.POSITION
 
 
 class ListParams(object):

@@ -1,9 +1,7 @@
 from database.employee import Employee
-from common.exception import EmployeeNotFoundException
-from common.exception import EmployeeIDFoundException
+from common import exception
 from common.const import ASC
 from common.const import EMPTY_DATABASE_MSG
-from common.const import EMPLOYEE_INFO
 
 
 class EmployeeClient(object):
@@ -17,7 +15,7 @@ class EmployeeClient(object):
         :return:
         """
         if employee.eid in self.database:
-            raise EmployeeIDFoundException
+            raise exception.EmployeeIDFoundException
         self.database[employee.eid] = employee
         return employee.eid
 
@@ -29,7 +27,7 @@ class EmployeeClient(object):
         :return:
         """
         if eid not in self.database:
-            raise EmployeeNotFoundException
+            raise exception.EmployeeNotFoundException
         self.database[eid] = employee
         return eid
 
@@ -40,7 +38,7 @@ class EmployeeClient(object):
         :return:
         """
         if eid not in self.database:
-            raise EmployeeNotFoundException
+            raise exception.EmployeeNotFoundException
         del self.database[eid]
         return eid
 
@@ -51,7 +49,7 @@ class EmployeeClient(object):
         :return:
         """
         if eid not in self.database:
-            raise EmployeeNotFoundException
+            raise exception.EmployeeNotFoundException
         return self.database[eid]
 
     def list(self, start=0, limit=None, sort="eid", direct=ASC, search=None):
@@ -90,5 +88,5 @@ class EmployeeClient(object):
         """
         if not edata:
             print(EMPTY_DATABASE_MSG)
-        for eid, employee in edata:
-            print(EMPLOYEE_INFO.format(employee=employee))
+        for _, employee in edata:
+            print(employee)

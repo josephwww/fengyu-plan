@@ -9,7 +9,7 @@ class Employee(object):
         self.name = name
         self.department = department
         self.position = position
-        self.entry_time = datetime.datetime.strptime(entry_time, ENTRY_DATE_FORMAT)
+        self.entry_time = entry_time
 
     def update(self, eid=None, name=None, department=None, position=None, entry_time=None):
         if eid:
@@ -21,7 +21,7 @@ class Employee(object):
         if position:
             self.position = position
         if entry_time:
-            self.entry_time = datetime.datetime.strptime(entry_time, ENTRY_DATE_FORMAT)
+            self.entry_time = entry_time
 
     def __str__(self) -> str:
         """

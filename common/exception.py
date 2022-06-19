@@ -1,11 +1,18 @@
+from common import const
+
+
 class EmployeeNotFoundException(Exception):
-    message = "Cannot find employee id in the database"
+    msg = const.BASE_ERROR_MSG.format(operation="", reason=const.EMPLOYEE_NOT_FOUND_MSG)
+
+
+class EmptyCommandException(Exception):
+    msg = const.DEFAULT_ERROR_MSG
 
 
 class CommandNotSupportedException(Exception):
-    message = "Command not supported"
+    msg = const.DEFAULT_ERROR_MSG
 
 
 class EmployeeIDFoundException(Exception):
-    message = "employee id already exists in the database"
+    msg = const.EID_EXIST_ERROR_MSG
 
