@@ -1,5 +1,5 @@
 from common import config
-from common.cmd_reader import Reader
+from command.user_reader import Reader
 from database.client import EmployeeClient
 import logging
 

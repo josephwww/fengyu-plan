@@ -1,5 +1,5 @@
 from jsonschema import validate, ValidationError
-from common import const
+from common import exception
 
 
 # data参数校验装饰器
@@ -9,10 +9,8 @@ def json_validate(schema):
             try:
                 validate(params, schema)
                 pass
-            except ValidationError as e:
-                print("参数校验失败：{}!".format(e.message))
-                return const.FAILED
-            else:
-                return func(cmd_class, client, **params)
+            except ValidationError:
+                raise exception.WrongParamException
+            return func(cmd_class, client, **params)
         return inner
     return wrapper

@@ -1,8 +1,11 @@
 from common import const
-from common.command import CMD
+from command.base import CMD
 
 
 class Reader(object):
+    """
+    命令行解析类，获取用户输入并执行解析和操作
+    """
     def __init__(self, client):
         self.cmd = None
         self.client = client

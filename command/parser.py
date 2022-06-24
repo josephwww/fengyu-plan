@@ -1,4 +1,5 @@
 import argparse
+
 from common.const import SupportedCommand
 from common.exception import CommandNotSupportedException
 from common.utils import parse_date
@@ -23,10 +24,10 @@ class CommandParser(object):
         for cmd in SupportedCommand.get_values():
             self.parsers_dict[cmd] = getattr(self, cmd)()
 
-    def parse_cmd(self, cmd, cmd_list):
-        parser = self.parsers_dict.get(cmd)
+    def parse_cmd(self, cmd_action, cmd_list):
+        parser = self.parsers_dict.get(cmd_action)  # 通过命令动作获取对应的parser
         options = vars(parser.parse_args(cmd_list))
-        del options["help"]
+        del options["help"]  # 默认parser会有个help字段，在此将其删除
         return options
 
     @classmethod

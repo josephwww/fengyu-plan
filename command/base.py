@@ -1,13 +1,17 @@
-from common import const
-from common.command_action import CommandAction
-from common.command_parser import CommandParser
-from common import exception
 import logging
+
+from common import const
+from common import exception
+from command.action import CommandAction
+from command.parser import CommandParser
 
 logger = logging.getLogger(__name__)
 
 
 class CMD(object):
+    """
+    命令类，通过用户输入的命令获取对应的解析器和执行接口
+    """
     def __init__(self, cmd):
         self.options = None
         self.action = None
@@ -28,5 +32,5 @@ class CMD(object):
         if cmd_action not in const.SupportedCommand.get_values():
             logger.error("Command {} not supported, please refer help".format(cmd_action))
             raise exception.CommandNotSupportedException(cmd_action)
-        self.options = self.cmd_parsers.parse_cmd(cmd_action, cmd_list)
+        self.options = self.cmd_parsers.parse_cmd(cmd_action, cmd_list)  # 将命令对应的参数转换为字典
         self.action = getattr(CommandAction, cmd_action)

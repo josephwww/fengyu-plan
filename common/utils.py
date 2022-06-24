@@ -19,6 +19,8 @@ def show_help():
     tb.add_row(["", "如：>> mod --eid 14589 --name LiSi --department VT"])
     tb.add_row(["delete", "删除员工信息 --eid <员工id>"])
     tb.add_row(["", "如：>> delete --eid 14589"])
+    tb.add_row(["get", "获取员工信息 --eid <员工id>"])
+    tb.add_row(["", "如：>> get --eid 14589"])
     tb.add_row(["exit", "退出程序"])
     tb.add_row(["list", "展示当前员工列表"])
     tb.align["功能"] = 'l'
