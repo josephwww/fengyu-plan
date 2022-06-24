@@ -3,7 +3,24 @@ from abc import ABC, abstractmethod
 
 class DatabaseObject(ABC):
     @abstractmethod
-    def update(self):
+    def update(self, *args, **kwargs):
+        pass
+
+    @abstractmethod
+    def __str__(self):
+        """
+        重写此方法用来格式化输出类的字符串
+        :return:
+        """
+        pass
+
+    @abstractmethod
+    def __contains__(self, item):
+        """
+        重写此方法用来类的关键字搜索
+        :param item:
+        :return:
+        """
         pass
 
 

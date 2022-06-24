@@ -12,7 +12,7 @@ CUSTOM_ERROR_MSG = "指令{cmd}有误，请重新输入"
 EID_EXIST_ERROR_MSG = "员工id已存在，无法添加！"
 WRONG_EID_MSG = "请输入正确的员工id"
 WRONG_ENTRY_TIME_MSG = "请输入带中杠的日期格式，例如2022-06-04"
-EMPTY_DATABASE_MSG = "数据库无员工数据，请插入！"
+EMPTY_DATABASE_MSG = "数据库无数据，请插入！"
 CREATE_SUCCESS_MSG = "新员工创建成功，员工id：{eid}"
 DELETE_SUCCESS_MSG = "员工{eid}已被删除"
 UPDATE_SUCCESS_MSG = "员工{eid}信息已更新"
@@ -21,8 +21,8 @@ BASE_ERROR_MSG = "{operation}失败，原因：{reason}"
 
 
 # 函数执行成功或失败返回
-OK = "ok"
-FAILED = "failed"
+OK = "操作成功"
+FAILED = "操作失败"
 
 
 # 命令参数限制

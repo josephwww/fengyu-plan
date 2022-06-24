@@ -1,10 +1,12 @@
+import logging
+
 from common import const
 from common import utils
-from common import exception
 from database.employee import Employee
+from common.utils import print_util
 from validation.decorator import json_validate
 from validation import schema
-import logging
+
 
 logger = logging.getLogger(__name__)
 
@@ -34,11 +36,9 @@ class CommandAction(object):
         :return:
         """
         new_employee = Employee(**employee)
-        # TODO json_validate处理时间格式
-        new_eid = client.create(new_employee)
+        client.create(new_employee)
         logger.info("create user {} success".format(new_employee))
-        print(const.CREATE_SUCCESS_MSG.format(eid=new_eid))
-        return const.OK
+        return new_employee.eid
 
     @classmethod
     @json_validate(schema=schema.schema_delete_employee)
@@ -52,8 +52,7 @@ class CommandAction(object):
         eid = employee.pop("eid")
         deleted_eid = client.delete(eid)
         logger.info("delete user {} success".format(deleted_eid))
-        print(const.DELETE_SUCCESS_MSG.format(eid=deleted_eid))
-        return const.OK
+        return deleted_eid
 
     @classmethod
     @json_validate(schema=schema.schema_mod_employee)
@@ -67,26 +66,19 @@ class CommandAction(object):
         eid = employee.pop("eid")
         origin_employee = client.get(eid)
         origin_employee.update(**employee)
-        mod_eid = client.update(eid, origin_employee)
+        updated_id = client.update(eid, origin_employee)
         logger.info("update eid {}: {} success".format(eid, origin_employee))
-        print(const.UPDATE_SUCCESS_MSG.format(eid=mod_eid))
-        return const.OK
+        return updated_id
 
     @classmethod
+    @print_util
     @json_validate(schema=schema.schema_get_employee)
     def get(cls, client, **employee):
-        eid = employee["eid"]
-        try:  # eid找不到
-            employee = client.get(eid)
-        except exception.EmployeeNotFoundException:
-            print(const.WRONG_EID_MSG)
-            return const.FAILED
-        print(employee)
-        return const.OK
+        eid = employee.get("eid")
+        return client.get(eid)
 
     @classmethod
+    @print_util
     @json_validate(schema=schema.schema_list_employees)
     def list(cls, client, **list_params):
-        # TODO SORT EmployeeAttributes sortable_attrs
-        client.list(**list_params)
-        return const.OK
+        return client.list(**list_params)

@@ -1,5 +1,4 @@
 import argparse
-import datetime
 from common.const import SupportedCommand
 from common.exception import CommandNotSupportedException
 from common.utils import parse_date

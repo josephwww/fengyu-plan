@@ -1,6 +1,8 @@
 import prettytable as pt
 import datetime
-from common.const import ENTRY_DATE_FORMAT
+
+from common import const
+from database.abstract_class import DatabaseObject
 
 
 def show_help():
@@ -26,4 +28,20 @@ def show_help():
 
 
 def parse_date(time_string):
-    return datetime.datetime.strptime(time_string, ENTRY_DATE_FORMAT)
+    return datetime.datetime.strptime(time_string, const.ENTRY_DATE_FORMAT)
+
+
+# 格式化打印GET接口返回值
+def print_util(func):
+    def wrapper(*args, **params):
+        db_objects = func(*args, **params)
+        tb = pt.PrettyTable(["功能", "介绍"])
+        if isinstance(db_objects, list):
+            if not db_objects:
+                print(const.EMPTY_DATABASE_MSG)
+            for obj in db_objects:
+                print(obj)
+        elif isinstance(db_objects, DatabaseObject):
+            print(db_objects)
+        return db_objects
+    return wrapper

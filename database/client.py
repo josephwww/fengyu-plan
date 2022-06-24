@@ -1,10 +1,11 @@
 from database.employee import Employee
+from database.abstract_class import Client
 from common import exception
 from common.const import ASC
 from common.const import EMPTY_DATABASE_MSG
 
 
-class EmployeeClient(object):
+class EmployeeClient(Client):
     def __init__(self):
         self.database = dict()
 
@@ -62,31 +63,16 @@ class EmployeeClient(object):
         :param search:
         :return:
         """
-        edata = list(self.database.items())
+        edata = list(self.database.values())
         # 搜索
         if search:
-            edata = [(eid, employee) for eid, employee in edata if search in employee]
+            edata = [employee for employee in edata if search in employee]
         # 排序
         if sort:
             reverse = False if direct == ASC else True
-            if sort == "eid":
-                edata.sort(key=lambda x: x[0], reverse=reverse)
-            else:
-                edata.sort(key=lambda x: getattr(x[1], sort), reverse=reverse)
+            edata.sort(key=lambda x: getattr(x, sort), reverse=reverse)
         # 分页
         edata = edata[start:]
         if limit:
             edata = edata[:limit]
-        self.print_employee_list(edata)
-
-    @staticmethod
-    def print_employee_list(edata):
-        """
-        格式化输出员工信息
-        :param edata:
-        :return:
-        """
-        if not edata:
-            print(EMPTY_DATABASE_MSG)
-        for _, employee in edata:
-            print(employee)
+        return edata

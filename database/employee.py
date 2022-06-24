@@ -1,9 +1,8 @@
-import datetime
-
 from common.const import ENTRY_DATE_FORMAT
+from database.abstract_class import DatabaseObject
 
 
-class Employee(object):
+class Employee(DatabaseObject):
     def __init__(self, eid, name, department, position, entry_time):
         self.eid = eid
         self.name = name
