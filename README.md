@@ -27,9 +27,7 @@ $ pip install -r requirements.txt
    list [--start <分页起始位置:int>] [--limit <分页数量:int>] [--sort <排序字段>] [--direct <排序顺序:ASC|DESC>] [--search <搜索字段:str>]
    list --search CMP
 ```
- 
-## License
-MIT © Richard McRichface
 
 ## UnitTest Coverage Report
 ![](https://github.com/josephwww/fengyu-plan/blob/master/%E5%8D%95%E6%B5%8B%E8%A6%86%E7%9B%96%E7%8E%87%E6%88%AA%E5%9B%BE.png?raw=true)
+
